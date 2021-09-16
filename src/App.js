@@ -1,22 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+/*
+ * @Description:
+ * @Date: 2021-09-16 11:23:44
+ * @LastEditTime: 2021-09-16 15:14:03
+ */
+import "./App.scss";
+import { useState } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import routers from "./router";
 
 function App() {
+  const [tabList, setTabList] = useState(["tab1", "tab2"]);
+  console.log(routers);
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {/* <div className="list">
+          {tabList.map((v) => {
+            return (
+              <a className="item" href={v}>
+                {v}
+              </a>
+            );
+          })}
+        </div> */}
+        <BrowserRouter>
+          <Switch>
+            {routers.map((router) => {
+              return (
+                <Route
+                  key={router.path}
+                  exact
+                  path={router.path}
+                  component={router.component}
+                ></Route>
+              );
+            })}
+          </Switch>
+        </BrowserRouter>
       </header>
     </div>
   );
